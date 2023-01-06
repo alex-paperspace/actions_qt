@@ -21,9 +21,10 @@ jobs:
           git submodule foreach --recursive 'git reset --hard'
       - run: echo "${{ github.workspace }}"
       - name: Garbage collect repos
-        run: >
+        run: |
           git gc
           git submodule foreach git gc
+          echo "All good"
  #     - name: Install dependencies
  #       run: |
  #         cp qtlicenses/qt-license.txt $HOME/.qt-license
