@@ -1,0 +1,12 @@
+#ifndef DEPENDENCY_GLOBAL_H
+#define DEPENDENCY_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(DEPENDENCY_LIBRARY)
+#  define DEPENDENCY_EXPORT Q_DECL_EXPORT
+#else
+#  define DEPENDENCY_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // DEPENDENCY_GLOBAL_H
