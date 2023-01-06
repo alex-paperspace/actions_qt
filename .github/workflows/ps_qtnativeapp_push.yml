@@ -1,0 +1,38 @@
+name: ps_qtnativeapp
+on: [push]
+
+env:
+  QT_HOME: /tmp/PS_QT
+  QT_INSTALLER_HOME: /tmp/QTIFW
+  MAC_S3_BUCKET_STAGING: s3://ps.public.resources/native-app/staging/darwin/
+  LINUX_S3_BUCKET_STAGING: s3://ps.public.resources/native-app/staging/linux/
+  MAC_S3_BUCKET_DEV: s3://ps.public.resources/native-app/dev/darwin/
+  LINUX_S3_BUCKET_DEV: s3://ps.public.resources/native-app/dev/linux/
+
+jobs:
+  build-osx:
+    runs-on: macos-12
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Check out submodules
+        run: |
+          git submodule update --init --recursive
+          git submodule foreach --recursive 'git reset --hard'
+      - run: echo "${{ github.workspace }}"
+      - name: Garbage collect repos
+        run: |
+          git gc
+          git submodule foreach git gc
+ #     - name: Install dependencies
+ #       run: |
+ #         cp qtlicenses/qt-license.txt $HOME/.qt-license
+ #         cd scripts
+ #         ./install-darwin-dependencies.sh
+ #     - name: Build
+ #       run: |
+ #         cd scripts
+ #         ./build-darwin.sh
+      # - name: Sign
+        
+      
