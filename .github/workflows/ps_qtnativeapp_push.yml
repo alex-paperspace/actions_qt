@@ -21,7 +21,7 @@ jobs:
           git submodule foreach --recursive 'git reset --hard'
       - run: echo "${{ github.workspace }}"
       - name: Garbage collect repos
-        run: |
+        run: >
           git gc
           git submodule foreach git gc
  #     - name: Install dependencies
