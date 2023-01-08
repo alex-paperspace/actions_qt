@@ -31,12 +31,12 @@ jobs:
       - name: Do something
         if: ${{ env.MY_VAR }} == 'true'
         run: |
-          export NEW_VAR = 'it is true'
+          export NEW_VAR='it is true'
           echo $NEW_VAR
       - name: Do something else
         if: ${{ env.MY_VAR }} == 'false'
         run: |
-          export NEW_VAR = 'it is false'
+          export NEW_VAR='it is false'
           echo $NEW_VAR
       - name: Upload artifact
         uses: actions/upload-artifact@v3
