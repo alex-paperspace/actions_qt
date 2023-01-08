@@ -24,26 +24,27 @@ jobs:
         run: |
           mkdir randomdir && cd randomdir
           echo "Hello World" >> testing.txt
+          pwd
+      - run: pwd
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: my_artifact
           path: randomdir/testing.txt
           
-  after-build:
-    needs: build-osx
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: my_artifact
-          path: /tmp/workspace
-      - name: List workspace
-        run: |
-          cd /tmp/workspace
-          echo .
-          ls .
+#  after-build:
+#    needs: build-osx
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Download artifact
+#        uses: actions/download-artifact@v3
+#        with:
+#          name: my_artifact
+#          path: /tmp/workspace
+#      - name: List workspace
+#        run: |
+#          cd /tmp/workspace
+#          ls .
  #     - name: Install dependencies
  #       run: |
  #         cp qtlicenses/qt-license.txt $HOME/.qt-license
