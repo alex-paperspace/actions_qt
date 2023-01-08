@@ -31,6 +31,7 @@ jobs:
           path: randomdir/testing.txt
           
   after-build:
+    needs: build-osx
     runs-on: ubuntu-latest
     steps:
       - name: Download artifact
