@@ -14,6 +14,9 @@ jobs:
     runs-on: macos-12
     env:
       MY_VAR: 'something'
+    if: ${{ MY_VAR == 'something' }}
+    name: 'Something'
+    run: export MY_VAR='Some link I need'
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
@@ -26,37 +29,31 @@ jobs:
         run: |
           mkdir randomdir && cd randomdir
           echo "Hello World" >> testing.txt
-          pwd
+          mkdir newdir && cd newdir
+          echo "New world" >> newtest.txt
       - run: pwd
-      - name: Do something
-        if: ${{ env.MY_VAR == 'something' }}
-        run: |
-          export NEW_VAR='it is true'
-          echo $NEW_VAR
-      - name: Do something else
-        if: ${{ env.MY_VAR == 'something else' }}
-        run: |
-          export NEW_VAR='it is false'
-          echo $NEW_VAR
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: my_artifact
-          path: randomdir/testing.txt
+          path: |
+            randomdir/testing.txt
+            randomdir/newdir/newtest.txt
           
-#  after-build:
-#    needs: build-osx
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Download artifact
-#        uses: actions/download-artifact@v3
-#        with:
-#          name: my_artifact
-#          path: /tmp/workspace
-#      - name: List workspace
-#        run: |
-#          cd /tmp/workspace
-#          ls .
+  after-build:
+    needs: build-osx
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: my_artifact
+          path: /tmp/workspace
+      - name: List workspace
+        run: |
+          cd /tmp/workspace
+          ls .
+          cd newdir && ls .
  #     - name: Install dependencies
  #       run: |
  #         cp qtlicenses/qt-license.txt $HOME/.qt-license
