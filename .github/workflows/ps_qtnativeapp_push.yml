@@ -20,11 +20,27 @@ jobs:
           git submodule update --init --recursive
           git submodule foreach --recursive 'git reset --hard'
       - run: echo "${{ github.workspace }}"
-      - name: Garbage collect repos
+      - name: create some file
         run: |
-          git gc
-          git submodule foreach git gc
-          echo "All good"
+          mkdir randomdir && cd randomdir
+          echo "Hello World" >> testing.txt
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: my_artifact
+          path: randomdir/testing.txt
+          
+  after-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: my_artifact
+      - name: List workspace
+        run: |
+          echo "${{ github.workspace }}"
+          ls "${{ github.workspace }}"
  #     - name: Install dependencies
  #       run: |
  #         cp qtlicenses/qt-license.txt $HOME/.qt-license
