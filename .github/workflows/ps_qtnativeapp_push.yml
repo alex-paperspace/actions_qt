@@ -29,12 +29,12 @@ jobs:
           pwd
       - run: pwd
       - name: Do something
-        if: '${{ env.MY_VAR }} == something'
+        if: ${{ env.MY_VAR == something }}
         run: |
           export NEW_VAR='it is true'
           echo $NEW_VAR
       - name: Do something else
-        if: '${{ env.MY_VAR }} == something else'
+        if: ${{ env.MY_VAR == something else }}
         run: |
           export NEW_VAR='it is false'
           echo $NEW_VAR
