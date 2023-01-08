@@ -47,7 +47,9 @@ jobs:
       - name: List workspace
         run: |
           cd /tmp/workspace
+          echo "in workspace.. ls"
           ls .
+          echo "cding to newdir... and ls"
           cd newdir && ls .
  #     - name: Install dependencies
  #       run: |
