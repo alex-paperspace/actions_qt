@@ -38,10 +38,12 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: my_artifact
+          path: /tmp/workspace
       - name: List workspace
         run: |
-          echo "${{ github.workspace }}"
-          ls "${{ github.workspace }}"
+          cd /tmp/workspace
+          echo .
+          ls .
  #     - name: Install dependencies
  #       run: |
  #         cp qtlicenses/qt-license.txt $HOME/.qt-license
