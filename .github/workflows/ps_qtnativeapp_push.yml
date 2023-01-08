@@ -12,6 +12,8 @@ env:
 jobs:
   build-osx:
     runs-on: macos-12
+    env:
+      MY_VAR: 'true'
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
@@ -26,6 +28,16 @@ jobs:
           echo "Hello World" >> testing.txt
           pwd
       - run: pwd
+      - name: Do something
+        if: $MY_VAR == 'true'
+        run: |
+          NEW_VAR = 'it is true'
+          echo $NEW_VAR
+      - name: Do something else
+        if: $MY_VAR == 'false'
+        run: |
+          NEW_VAR = 'it is false'
+          echo $NEW_VAR
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
