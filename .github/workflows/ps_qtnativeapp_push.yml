@@ -12,11 +12,6 @@ env:
 jobs:
   build-osx:
     runs-on: macos-12
-    env:
-      MY_VAR: 'something'
-    if: ${{ MY_VAR == 'something' }}
-    name: 'Something'
-    run: export MY_VAR='Some link I need'
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
