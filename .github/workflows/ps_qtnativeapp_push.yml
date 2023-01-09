@@ -18,56 +18,8 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
-      - name: Check out submodules
-        run: |
-          git submodule update --init --recursive
-          git submodule foreach --recursive 'git reset --hard'
-      - run: echo "${{ github.workspace }}"
-      - run: ./script.sh 
-      - run: echo " $ANOTHER_VARIABLE "
-      - run: echo ${{ github.run_id }}
-      - run: echo ${{ github.run_number }}
-      - run: echo ${{ github.run_attempt }}
-      - name: create some file
-        run: |
-          mkdir randomdir && cd randomdir
-          echo "Hello World" >> testing.txt
-          mkdir newdir && cd newdir
-          echo "New world" >> newtest.txt
-      - run: pwd
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: my_artifact
-          path: |
-            randomdir/testing.txt
-            randomdir/newdir/newtest.txt
-          
-  after-build:
-    needs: build-osx
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: my_artifact
-          path: /tmp/workspace
-      - name: List workspace
-        run: |
-          cd /tmp/workspace
-          echo "in workspace.. ls"
-          ls .
-          echo "cding to newdir... and ls"
-          cd newdir && ls .
- #     - name: Install dependencies
- #       run: |
- #         cp qtlicenses/qt-license.txt $HOME/.qt-license
- #         cd scripts
- #         ./install-darwin-dependencies.sh
- #     - name: Build
- #       run: |
- #         cd scripts
- #         ./build-darwin.sh
-      # - name: Sign
+      - run: echo "run_id ${{ github.run_id }}"
+      - run: echo "run_number ${{ github.run_number }}"
+      - run: echo "run_attempt ${{ github.run_attempt }}"
         
       
