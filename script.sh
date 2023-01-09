@@ -1,1 +1,1 @@
-echo " ${{ env.RANDOM_VARIABLE }} "
+echo " $RANDOM_VARIABLE "
