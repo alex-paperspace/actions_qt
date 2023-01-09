@@ -13,6 +13,8 @@ env:
 jobs:
   build-osx:
     runs-on: macos-12
+    env: 
+      ANOTHER_VARIABLE: "something variable"
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
@@ -22,6 +24,7 @@ jobs:
           git submodule foreach --recursive 'git reset --hard'
       - run: echo "${{ github.workspace }}"
       - run: ./script.sh 
+      - run: echo " $ANOTHER_VARIABLE "
       - name: create some file
         run: |
           mkdir randomdir && cd randomdir
