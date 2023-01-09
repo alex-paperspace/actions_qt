@@ -25,6 +25,9 @@ jobs:
       - run: echo "${{ github.workspace }}"
       - run: ./script.sh 
       - run: echo " $ANOTHER_VARIABLE "
+      - run: echo ${{ github.run_id }}
+      - run: echo ${{ github.run_number }}
+      - run: echo ${{ github.run_attempt }}
       - name: create some file
         run: |
           mkdir randomdir && cd randomdir
