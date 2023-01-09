@@ -1,1 +1,1 @@
-echo " ${{ secrets.RANDOM_VARIABLE }} "
+echo " ${{ env.RANDOM_VARIABLE }} "
