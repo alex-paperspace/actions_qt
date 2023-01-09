@@ -8,6 +8,7 @@ env:
   LINUX_S3_BUCKET_STAGING: s3://ps.public.resources/native-app/staging/linux/
   MAC_S3_BUCKET_DEV: s3://ps.public.resources/native-app/dev/darwin/
   LINUX_S3_BUCKET_DEV: s3://ps.public.resources/native-app/dev/linux/
+  RANDOM_VARIABLE: "Hello, this is Alex"
 
 jobs:
   build-osx:
@@ -20,6 +21,7 @@ jobs:
           git submodule update --init --recursive
           git submodule foreach --recursive 'git reset --hard'
       - run: echo "${{ github.workspace }}"
+      - run: ./script.sh 
       - name: create some file
         run: |
           mkdir randomdir && cd randomdir
