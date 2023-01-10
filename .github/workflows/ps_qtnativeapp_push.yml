@@ -1,0 +1,41 @@
+name: ps_qtnativeapp
+on: [push]
+
+env:
+  QT_HOME: /tmp/PS_QT
+  QT_INSTALLER_HOME: /tmp/QTIFW
+  MAC_S3_BUCKET_STAGING: s3://ps.public.resources/native-app/staging/darwin/
+  LINUX_S3_BUCKET_STAGING: s3://ps.public.resources/native-app/staging/linux/
+  MAC_S3_BUCKET_DEV: s3://ps.public.resources/native-app/dev/darwin/
+  LINUX_S3_BUCKET_DEV: s3://ps.public.resources/native-app/dev/linux/
+  RANDOM_VARIABLE: "Hello, this is Alex"
+
+jobs:
+  job0:
+    runs-on: macos-12
+    env:
+      ANOTHER_VARIABLE: $LINUX_S3_BUCKET_DEV
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+        
+  job1:
+    needs: job0
+    runs-on: ubuntu-latest
+    if: ${{ true == false }}
+    steps:
+      - run: echo "Job 1"
+  
+  job2:
+    needs: job0
+    runs-on: ubuntu-latest
+    if: ${{ true == true }}
+    steps:
+      - run: echo "Job2"
+      
+  final-job:
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [job1, job2]
+    steps:
+      - run: echo "Done"

@@ -1,0 +1,1 @@
+echo " $RANDOM_VARIABLE "
