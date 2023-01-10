@@ -26,6 +26,6 @@ jobs:
         if: ${{ env.ANOTHER_VARIABLE == '$LINUX_S3_BUCKET_DEV' }}
         run: export ANOTHER_VARIABLE=${{ env.LINUX_S3_BUCKET_STAGING }}
       - run: echo ${{ env.ANOTHER_VARIABLE }}
-      - uses: testing/hello
+      - uses: testing/hello@v1
         with:
           name: Alex
