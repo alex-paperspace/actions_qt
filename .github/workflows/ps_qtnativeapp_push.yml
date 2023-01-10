@@ -13,7 +13,7 @@ env:
 jobs:
   build-osx:
     runs-on: macos-12
-    env: 
+    env:
       ANOTHER_VARIABLE: $LINUX_S3_BUCKET_DEV
     steps:
       - name: Check out repository code
@@ -26,5 +26,6 @@ jobs:
         if: ${{ env.ANOTHER_VARIABLE == '$LINUX_S3_BUCKET_DEV' }}
         run: export ANOTHER_VARIABLE=${{ env.LINUX_S3_BUCKET_STAGING }}
       - run: echo ${{ env.ANOTHER_VARIABLE }}
-        
-      
+      - uses: testing/hello
+        with:
+          name: Alex
