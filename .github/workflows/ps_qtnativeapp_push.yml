@@ -19,23 +19,17 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v3
         
-  job1:
+  job1-dev:
     needs: job0
     runs-on: ubuntu-latest
-    if: ${{ true == false }}
+    if: ${{ github.ref != 'refs/heads/release_v*' }}
     steps:
-      - run: echo "Job 1"
+      - run: echo "Job 1 dev"
   
-  job2:
+  job2-staging:
     needs: job0
     runs-on: ubuntu-latest
-    if: ${{ true == true }}
+    if:  ${{ github.ref == 'refs/heads/release_v*' }}
     steps:
-      - run: echo "Job2"
+      - run: echo "Job2 staging"
       
-  final-job:
-    runs-on: ubuntu-latest
-    if: always()
-    needs: [job1, job2]
-    steps:
-      - run: echo "Done"
