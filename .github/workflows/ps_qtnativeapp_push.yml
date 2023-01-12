@@ -24,6 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.ref != 'refs/heads/release_v*' }}
     steps:
+      - run: echo ${{ github.ref }}
       - run: echo "Job 1 dev"
   
   job2-staging:
@@ -31,5 +32,6 @@ jobs:
     runs-on: ubuntu-latest
     if:  ${{ github.ref == 'refs/heads/release_v*' }}
     steps:
+      - run: echo ${{ github.ref }}
       - run: echo "Job2 staging"
       
